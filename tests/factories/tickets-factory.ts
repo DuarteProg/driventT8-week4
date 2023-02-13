@@ -13,6 +13,63 @@ export async function createTicketType() {
   });
 }
 
+export async function createTicketWithHotel() {
+  return prisma.ticketType.create({
+    data: {
+      name: faker.name.findName(),
+      price: faker.datatype.number(),
+      isRemote: false,
+      includesHotel: true,
+    },
+  });
+}
+
+export async function createTicketWithoutHotel() {
+  return prisma.ticketType.create({
+    data: {
+      name: faker.name.findName(),
+      price: faker.datatype.number(),
+      isRemote: true,
+      includesHotel: false,
+    },
+  });
+}
+
+export async function createTicketType1() {
+  return prisma.ticketType.create({
+    data: {
+      name: faker.name.findName(),
+      price: faker.datatype.number(),
+      isRemote: false,
+      includesHotel: false,
+    },
+  });
+}
+
+export async function createTicketTypeInvalid() {
+  return prisma.ticketType.create({
+    data: {
+      name: "Invalid",
+      price: 1500,
+      isRemote: true,
+      includesHotel: true,
+    }
+  });
+}
+
+export async function createTicket(enrollmentId: number, ticketTypeId: number, status: TicketStatus) {
+  return prisma.ticket.create({
+    data: {
+      enrollmentId,
+      ticketTypeId,
+      status,
+      
+    },
+  });
+}
+
+
+
 export async function createTicketTypeRemote() {
   return prisma.ticketType.create({
     data: {
@@ -35,12 +92,3 @@ export async function createTicketTypeWithHotel() {
   });
 }
 
-export async function createTicket(enrollmentId: number, ticketTypeId: number, status: TicketStatus) {
-  return prisma.ticket.create({
-    data: {
-      enrollmentId,
-      ticketTypeId,
-      status,
-    },
-  });
-}

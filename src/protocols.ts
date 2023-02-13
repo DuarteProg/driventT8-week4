@@ -1,3 +1,4 @@
+import { Booking } from "@prisma/client";
 export type ApplicationError = {
   name: string;
   message: string;
@@ -30,3 +31,7 @@ export type RequestError = {
   name: string,
   message: string,
 };
+
+export type BookingCreation = Omit <Booking, "id" | "createdAt" | "updatedAt" >
+
+export type BookingUpsert = Omit <Booking, "userId"| "createdAt" | "updatedAt" >
